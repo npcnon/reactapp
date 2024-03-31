@@ -1,3 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+/* base styles */
+* {
+  margin: 0;
+  font-family: "Quicksand";
+  color: #333;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -7,7 +16,134 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.App {
+  background-image: url('.//benedicto_background.jpg') ;
+  background-size: cover; /* Prevent stretching */
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  min-width: 100vh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box; /* Include padding and border in the total size */
 }
+
+/* Your other styles here */
+
+.navbar {
+  padding: 20px;
+  display: flex;
+  max-width: 100%;
+  margin: 0 auto;
+  backdrop-filter: blur(5px); /* Apply a blur effect */
+  border-color: rgba(2, 92, 128, 0.5);
+  backdrop-filter: blur(5px);
+  align-items: center;
+  border-radius: 10px; 
+}
+
+.navbar h1 {
+  color: rgba(0, 0, 0, 0.8);
+}
+.navbar .links {
+  margin-left: auto;               
+}
+.navbar a {
+  margin-left: 16px;
+  text-decoration: none;
+  padding: 6px;
+  color: white; /* No quotes around color value */
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+  backdrop-filter: blur(5px); /* Apply a blur effect */
+  border-radius: 10px; /* Numeric value without quotes */
+}
+
+.navbar a:hover {
+  color: rgb(190, 224, 228);
+}
+.content {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+/* blog previews / list */
+.blog-preview {
+  padding: 10px 16px;
+  margin: 20px 0;
+  border-bottom: 1px solid #fafafa;
+}
+.blog-preview:hover {
+  box-shadow: 1px 3px 5px rgba(0,0,0,0.1);
+}
+.blog-preview h2 {
+  font-size: 20px;
+  color: #f1356d;
+  margin-bottom: 8px;
+}
+
+.container {
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+  backdrop-filter: blur(5px); /* Apply a blur effect */
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 60%;
+  margin: 0 auto;
+}
+
+
+.container h2 {
+  color: white;
+  text-align: center;
+}
+
+.form-group {
+  margin-right: 35px;
+  margin-left: 35px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  flex: 1;
+}
+
+.form-group-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+label {
+  color: white;
+}
+
+input[type="text"],
+input[type="date"],
+select,
+input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #fff;
+}
+
+input[type="submit"] {
+  background-color: white;
+  color: steelblue;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+input[type="submit"] {
+  background-color: white;
+  color: steelblue;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  margin: 0 auto; /* Center horizontally */
+}
+
+

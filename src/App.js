@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+  import { BrowserRouter as Router, Route,Routes } from 'react-router-dom';
+  import PersonalForm from './personal_form';
+  import FamilyBackground from './family_background';
+  import AcademicBackground from './academic_background';
+  import AcademicHistory from './academic_history';
+  import Navbar from './navbar';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+  function App() {
+    return (
+      <Router>
+        <div className="App">
+          <Navbar />
+          <div className='Content'>
+            <Routes>
+              <Route exact path="/" element={<PersonalForm/>} />
+              <Route path="/family-background" element={<FamilyBackground/>} />
+              <Route path="/academic-background" element={<AcademicBackground/>}/>
+              <Route path="/academic-history" element={<AcademicHistory/>}/>
+            </Routes>
+          </div>
+        </div>
+      </Router>
+    );
+  }
 
-export default App;
+  export default App;
