@@ -13,19 +13,23 @@ body {
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  -moz-osx-font-smoothing: grayscale; 
+  overflow: overlay;
+  overflow-x: hidden; /* Enable horizontal scrollbar */
+  overflow-y: scroll; /* Disable vertical scrollbar */
 }
 
 .App {
-  background-image: url('.//benedicto_background.jpg') ;
-  background-size: cover; /* Prevent stretching */
+  background-image: url('.//benedicto_background.jpg');
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  background-attachment: fixed; /* Add this line */
   min-height: 100vh;
   min-width: 100vh;
   display: flex;
   flex-direction: column;
-  box-sizing: border-box; /* Include padding and border in the total size */
+  box-sizing: border-box;
 }
 
 /* Your other styles here */
@@ -96,6 +100,10 @@ body {
   color: white;
   text-align: center;
 }
+.container h3 {
+  color: white;
+  text-align: center;
+}
 
 .form-group {
   margin-right: 35px;
@@ -115,6 +123,7 @@ label {
 }
 
 input[type="text"],
+input[type="email"],
 input[type="date"],
 select,
 input[type="file"] {
@@ -147,3 +156,24 @@ input[type="submit"] {
 }
 
 
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(0, 0, 0);
+  border: solid 3px darkgray;
+  border-radius: 15px;
+  overflow: auto;
+}
+
+::-webkit-scrollbar-thumb {
+  background: darkgray;
+  border-radius: 15px;
+  min-height: 40px;
+  overflow: auto;
+  border: 0.5rem solid transparent;
+  background-clip: padding-box;
+  transition: height 0.2s ease-in-out;
+  padding: 5px;
+}
