@@ -1,36 +1,9 @@
-import React, { useState } from 'react';
+
 import AnimatedPage from './AnimatedPage';
 
-const StudentForm = () => {
-  const [formData, setFormData] = useState({
-    student_id:'',
-    f_name:'',
-    m_name:'',
-    l_name:'',
-    gender:'',
-    birth_date:'',
-    birth_place:'',
-    marital_status:'',
-    religion:'',
-    country:'',
-    acr: '',
-    city_address:'',
-    city_contact_number:'',
-    province_address:'',
-    province_contact_number:'',
-    email:'',
-    contact_number:'',
-    citizenship:'',
-  });
+const StudentForm = ({ formData, handleChange }) => {
 
-  const handleChange = (e) => {
-      setFormData({
-        ...formData,
-        [e.target.name]: e.target.value
-      });
-    
-  };
-
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formDataToSend = new FormData();

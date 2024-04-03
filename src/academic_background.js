@@ -1,29 +1,40 @@
-import React, { useState } from 'react';
+import AnimatedPage from './AnimatedPage';
 
-const AcademicBackground = () => {
-  const [formData, setFormData] = useState({
-    course: '',
-    major_in: '',
-    student_type: '',
-    semester_entry: '',
-    year_entry: '',
-    year_graduate: '',
-    application_type: '',
-  });
+const AcademicBackground =  ({ formData, handleChange, stdnt_id }) => {
 
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle form submission
+    const formDataToSend = new FormData();
+    formDataToSend.append('stdnt_id', stdnt_id);
+    formDataToSend.append('course', formData.course);
+    formDataToSend.append('major_in', formData.major_in);
+    formDataToSend.append('student_type', formData.student_type);
+    formDataToSend.append('semester_entry', formData.semester_entry);
+    formDataToSend.append('year_entry', formData.year_entry);
+    formDataToSend.append('year_graduate', formData.year_graduate);
+    formDataToSend.append('application_type', formData.application_type);
+
+    try {
+      const response = await fetch('http://127.0.0.1:8000/api/stdntacademicbackground/', {
+        method: 'POST',
+        body: formDataToSend
+      });
+      if (response.ok) {
+        console.log(' request succeeded');
+      } else {
+        console.error('Failed to submit request');
+        console.log('student id:', stdnt_id)
+      }
+    } catch(error) {
+      console.error('Error submitting requests:', error);
+      console.log('student id:', stdnt_id)
+    }
   };
 
   return (
+    <AnimatedPage>
     <div className="container">
       <h2>Academic Background Form</h2>
       <form onSubmit={handleSubmit}>
@@ -38,7 +49,6 @@ const AcademicBackground = () => {
             required
           />
         </div>
-
         <div className="form-group">
           <label htmlFor="major_in">Major:</label>
           <input
@@ -50,23 +60,17 @@ const AcademicBackground = () => {
             required
           />
         </div>
-
         <div className="form-group">
           <label htmlFor="student_type">Student Type:</label>
-          <select
+          <input
+            type="text"
             id="student_type"
             name="student_type"
             value={formData.student_type}
             onChange={handleChange}
             required
-          >
-            <option value="">Select Student Type</option>
-            <option value="full-time">Full-time</option>
-            <option value="part-time">Part-time</option>
-            <option value="online">Online</option>
-          </select>
+          />
         </div>
-
         <div className="form-group">
           <label htmlFor="semester_entry">Semester Entry:</label>
           <input
@@ -78,11 +82,10 @@ const AcademicBackground = () => {
             required
           />
         </div>
-
         <div className="form-group">
-          <label htmlFor="year_entry">Year of Entry:</label>
+          <label htmlFor="year_entry">Year Entry:</label>
           <input
-            type="text"
+            type="Date"
             id="year_entry"
             name="year_entry"
             value={formData.year_entry}
@@ -90,11 +93,10 @@ const AcademicBackground = () => {
             required
           />
         </div>
-
         <div className="form-group">
-          <label htmlFor="year_graduate">Year of Graduation:</label>
+          <label htmlFor="year_graduate">Year Graduate:</label>
           <input
-            type="text"
+            type="Date"
             id="year_graduate"
             name="year_graduate"
             value={formData.year_graduate}
@@ -102,7 +104,6 @@ const AcademicBackground = () => {
             required
           />
         </div>
-
         <div className="form-group">
           <label htmlFor="application_type">Application Type:</label>
           <input
@@ -114,10 +115,10 @@ const AcademicBackground = () => {
             required
           />
         </div>
-
         <input type="submit" value="Submit" className="btn_submit" />
       </form>
     </div>
+    </AnimatedPage>
   );
 };
 

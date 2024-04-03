@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PersonalForm from './personal_form';
 import FamilyBackground from './family_background';
 import AcademicBackground from './academic_background';
@@ -29,9 +29,9 @@ function App() {
     contact_number:'',
     citizenship:'',
   });
-  
+
   const [familyFormData, setFamilyFormData] = useState({
-    stdnt_id:PersonalFormData.student_id,
+    stdnt_id: PersonalFormData.student_id,
     father_fname:'',
     father_mname:'',
     father_lname:'',
@@ -56,8 +56,23 @@ function App() {
     guardian_email:'',
   });
 
+  const [AcademicBackgroundformData, setAcademicBackgroundFormData] = useState({
+    stdnt_id: PersonalFormData.student_id,
+    course:'',
+    major_in:'',
+    student_type:'',
+    semester_entry:'',
+    year_entry:'',
+    year_graduate:'',
+    application_type:'',
+  });
 
-
+  const handleAcademicBackgroundDataChange = (e) => {
+    setAcademicBackgroundFormData({
+      ...AcademicBackgroundformData,
+      [e.target.name]: e.target.value
+    });
+  };
 
   const handlePersonalDataChange = (e) => {
     setPersonalFormData({
@@ -73,6 +88,17 @@ function App() {
     });
   };
 
+  useEffect(() => {
+    setFamilyFormData((prevFormData) => ({
+      ...prevFormData,
+      stdnt_id: PersonalFormData.student_id
+    }));
+    setAcademicBackgroundFormData((prevFormData) => ({
+      ...prevFormData,
+      stdnt_id: PersonalFormData.student_id
+    }));
+  }, [PersonalFormData.student_id]);
+
   return (
     <Router>
       <div className="App">
@@ -85,7 +111,11 @@ function App() {
               path="/family-background"
               element={<FamilyBackground formData={familyFormData} handleChange={handleFamilyBackgroundChange} />}
             />
-            <Route path="/academic-background" element={<AcademicBackground />} />
+            <Route
+              path="/academic-background"
+              element={<AcademicBackground formData={AcademicBackgroundformData} handleChange={handleAcademicBackgroundDataChange} stdnt_id={PersonalFormData.student_id} />}
+            />
+
             <Route path="/academic-history" element={<AcademicHistory />} />
             <Route path="/something" element={<Something />} />
           </Routes>
@@ -96,6 +126,5 @@ function App() {
     </Router>
   );
 }
-
 
 export default App;
