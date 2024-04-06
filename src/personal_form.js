@@ -1,13 +1,15 @@
 
 import AnimatedPage from './AnimatedPage';
 
-const StudentForm = ({ formData, handleChange }) => {
+const StudentForm = ({ formData, handleChange}) => {
 
- 
+  console.log("student id:", formData.student_id)
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const formDataToSend = new FormData();
-    formDataToSend.append('student_id', formData.f_name);
+    formDataToSend.append('student_id', formData.student_id);
+    
     formDataToSend.append('f_name', formData.f_name);
     formDataToSend.append('m_name', formData.m_name);
     formDataToSend.append('l_name', formData.l_name);

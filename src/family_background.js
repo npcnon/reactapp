@@ -1,13 +1,13 @@
 import AnimatedPage from "./AnimatedPage";
 
-const FamilyBackground = ({ formData, handleChange }) => {
-
+const FamilyBackground = ({ formData, handleChange,stdnt_id }) => {
+  console.log("student id: ",stdnt_id)
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle form submission
-
+   
     const formDataToSend = new FormData();
-    formDataToSend.append('stdnt_id', formData.stdnt_id);
+    formDataToSend.append('stdnt_id', stdnt_id);
     formDataToSend.append('father_fname', formData.father_fname);
     formDataToSend.append('father_mname', formData.father_mname);
     formDataToSend.append('father_lname', formData.father_lname);
@@ -30,6 +30,7 @@ const FamilyBackground = ({ formData, handleChange }) => {
     formDataToSend.append('guardian_relation', formData.guardian_relation);
     formDataToSend.append('guardian_contact_number', formData.guardian_contact_number);
     formDataToSend.append('guardian_email', formData.guardian_email);
+  
     try {
       const response = await fetch('http://127.0.0.1:8000/api/stdntfamily/', {
         method: 'POST',
