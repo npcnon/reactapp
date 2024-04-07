@@ -1,9 +1,26 @@
 import AnimatedPage from './AnimatedPage';
 import React, {useEffect, useRef} from 'react';
+import { Link } from 'react-router-dom';
 
-const AcademicBackground = ({ formData, handleChange, sendStudentId,available_student_id,set_id }) => {
-  let student_id;
+const AcademicBackground = ({ formData, handleChange, sendStudentId,available_student_id,handle_submit,dep_id, is_undergraduate,stdnt_id }) => {
   const department_id = useRef(null)
+
+
+  useEffect(() => {
+
+    if (formData.student_type === "Graduate") {
+      is_undergraduate(false);
+    }
+    else if(formData.student_type === "")
+    {
+      is_undergraduate(false);
+    }
+    else {
+      is_undergraduate(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [formData.student_type]);
+
 
   useEffect(() => {
     switch (formData.course) {
@@ -12,7 +29,6 @@ const AcademicBackground = ({ formData, handleChange, sendStudentId,available_st
         break;
       case "Bachelor of Science in Accountancy (BSA)":
       case "Bachelor of Science in Business Administration (BSBA)":
-      case "Bachelor of Science in Industrial Technology (BSIT)":
         department_id.current = "02";
         break;
       case "Bachelor of Science in Information Technology (BSIT)":
@@ -28,47 +44,47 @@ const AcademicBackground = ({ formData, handleChange, sendStudentId,available_st
       case "Bachelor of Science in Electrical Engineering (BSEE)":
       case "Bachelor of Science in Mechanical Engineering (BSME)":
       case "Bachelor of Science in Civil Engineering (BSCE)":
+      case "Bachelor of Science in Industrial Technology (BSIT)":
         department_id.current = "06";
         break;
       default:
+        console.log("default activated")
         department_id.current = ""; // Set default value or handle error case
     }
-    // Use department_id here as needed
-  }, [formData.course, formData.year_entry, sendStudentId]);
-
-
-  const data = useRef(null);
-  const studentIds = useRef(null);
-  useEffect(() => {
+   
     if (available_student_id.length === 0) {
-      const fetch_id = async () => {
-        try {
-          const response = await fetch('http://127.0.0.1:8000/api/stdntpersonal/');
-          if (response.ok) {
-            data.current = await response.json();
-            studentIds.current = data.current.map((item) => item.student_id);
-            console.log('(running fetch data)Fetched data:', data);
-            set_id(studentIds);
-          } else {
-            console.error('Failed to fetch available student IDs');
-          }
-        } catch (error) {
-          console.error('Error fetching available student IDs:', error);
-        }
-      };
-  
-      fetch_id();
+      console.log('No data available');
+      const temp_id = (available_student_id.length + 1).toString().padStart(4, '0');
+      const generatedStudentId = formData.year_entry.toString() + department_id.current + temp_id;
+      console.log("real id:", generatedStudentId);
+      sendStudentId(generatedStudentId); // Call sendStudentId here
     }
-  }, [available_student_id,set_id]); // Add available_student_id as a dependency
+    else {
+      // Find the maximum student ID from available_student_id and calculate the next one
+      const maxStudentId = Math.max(...available_student_id.map(id => parseInt(id.substring(8))));
+      console.log("max Student ID: ", maxStudentId)
+      const nextStudentId = (maxStudentId + 1).toString().padStart(4, '0');
+      const generatedStudentId = formData.year_entry.toString() + department_id.current + nextStudentId;
+      console.log("real id:", generatedStudentId);
+      sendStudentId(generatedStudentId); // Call sendStudentId here
+    }
+   
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    dep_id = department_id.current
+  }, [formData.course, formData.year_entry, available_student_id]);
+
+
+   
   
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle form submission
     const formDataToSend = new FormData();
-    formDataToSend.append('stdnt_id', student_id);
+    formDataToSend.append('stdnt_id', '1900010012');
     formDataToSend.append('course', formData.course);
-    formDataToSend.append('department', department_id); // Use department_id here
+    formDataToSend.append('department', department_id.current); // Use department_id here
     formDataToSend.append('major_in', formData.major_in);
     formDataToSend.append('student_type', formData.student_type);
     formDataToSend.append('semester_entry', formData.semester_entry);
@@ -107,8 +123,8 @@ const AcademicBackground = ({ formData, handleChange, sendStudentId,available_st
                 >
                     <option value="">Select Course</option>
                     <option value="Bachelor of Arts in Mass Communication">Bachelor of Arts in Mass Communication</option>
-                    <option value="Graduate">Bachelor of Science in Accountancy (BSA)</option>
-                    <option value="UnderGraduate">Bachelor of Science in Business Administration (BSBA)</option>
+                    <option value="Bachelor of Science in Accountancy (BSA)">Bachelor of Science in Accountancy (BSA)</option>
+                    <option value="Bachelor of Science in Business Administration (BSBA)">Bachelor of Science in Business Administration (BSBA)</option>
                     <option value="Bachelor of Science in Information Technology (BSIT)">Bachelor of Science in Information Technology (BSIT)</option>
                     <option value="Associate in Computer Technology (ACT)">Associate in Computer Technology (ACT)</option>
                     <option value="Bachelor of Science in Elementary Education">Bachelor of Science in Elementary Education</option>
@@ -156,9 +172,9 @@ const AcademicBackground = ({ formData, handleChange, sendStudentId,available_st
               required
             >
             <option value="">Select Semester/entry</option>
-                    <option value="Graduate">First</option>
-                    <option value="UnderGraduate">Second</option>
-                    <option value="UnderGraduate">Summer</option>
+                    <option value="First">First</option>
+                    <option value="Second">Second</option>
+                    <option value="Summer">Summer</option>
               </select>
           </div>
           <div className="form-group">
@@ -200,10 +216,32 @@ const AcademicBackground = ({ formData, handleChange, sendStudentId,available_st
             >
                 <option value="">Select Type of Application</option>
                     <option value="Graduate">Freshmen</option>
-                    <option value="UnderGraduate">Transferee</option>
-                    <option value="UnderGraduate">Cross Enrollee</option>
+                    <option value="Transferee">Transferee</option>
+                    <option value="Cross Enrollee">Cross Enrollee</option>
               </select>
           </div>
+          <div className="form-group-container">
+          <div className="button-container">
+            <Link to="/family-background" style={{ textDecoration: 'none' }}>
+              <button style={{ textDecoration: 'none' }}>Back</button>
+            </Link>
+            {formData.student_type === "Graduate" ? (
+              <button onClick={handle_submit}>Submit</button>
+            ) : formData.student_type === "" ? (
+              <button disabled>Submit</button>
+            ) : (
+              <Link to="/academic-history" style={{ textDecoration: 'none' }}>
+                <button style={{ textDecoration: 'none' }}>Next</button>
+              </Link>
+            )}
+          </div>
+          </div>
+          
+
+          
+
+          
+
           <input type="submit" value="Submit" className="btn_submit" />
         </form>
       </div>

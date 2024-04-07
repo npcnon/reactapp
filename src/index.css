@@ -144,16 +144,6 @@ input[type="submit"],button {
 }
 
 
-input[type="submit"],button {
-  background-color: white;
-  color: steelblue;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  display: block;
-  margin: 0 auto; /* Center horizontally */
-}
 
 
 ::-webkit-scrollbar {
@@ -176,4 +166,24 @@ input[type="submit"],button {
   background-clip: padding-box;
   transition: height 0.2s ease-in-out;
   padding: 5px;
+}
+
+
+.button-container {
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  margin-right: 35px;
+  margin-left: 35px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+
+.button-container button {
+  flex: 1;
+  margin: 0 8px; /* Adjust margin as needed */
 }

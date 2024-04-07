@@ -1,9 +1,8 @@
 
 import AnimatedPage from './AnimatedPage';
+import { Link } from 'react-router-dom';
 
 const StudentForm = ({ formData, handleChange}) => {
-
-  console.log("student id:", formData.student_id)
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -705,7 +704,13 @@ const StudentForm = ({ formData, handleChange}) => {
        </div>
         
         
-        <input type="submit" value="Submit" className='btn_submit'/>
+       <div className="form-group-container">
+          <div className="button-container">
+              <Link to="/family-background" style={{ textDecoration: 'none' }}>
+                <button style={{ textDecoration: 'none' }}>Next</button>
+              </Link>
+          </div>
+          </div>
       </form>
     </div>
     </AnimatedPage>

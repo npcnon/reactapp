@@ -1,5 +1,5 @@
-  import { BrowserRouter as Router, Route, Routes, useLocation} from 'react-router-dom';
-  import React, { useState, useEffect} from 'react';
+  import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+  import React, { useState, useEffect,useRef} from 'react';
   import PersonalForm from './personal_form';
   import FamilyBackground from './family_background';
   import AcademicBackground from './academic_background';
@@ -119,7 +119,7 @@
     };
 
 
-    const handleSubmit = async (e) => {
+    const handleSubmitpersonal = async (e) => {
       e.preventDefault();
 
       const formDataToSend = new FormData();
@@ -137,7 +137,7 @@
       formDataToSend.append('acr', PersonalFormData.acr);
       
       const formDataToSendAdd = new FormData();
-      formDataToSendAdd.append('stdnt_id', PersonalFormData.f_name);
+      formDataToSendAdd.append('stdnt_id', PersonalFormData.student_id  );
       formDataToSendAdd.append('email', PersonalFormData.email);
       formDataToSendAdd.append('contact_number', PersonalFormData.contact_number);
       formDataToSendAdd.append('citizenship', PersonalFormData.citizenship);
@@ -174,18 +174,130 @@
     };
 
 
-    const [availableStudentIds, setAvailableStudentIds] = useState([]);
-    const location = useLocation();
+    const handleSubmitfamily = async (e) => {
+      e.preventDefault();
+      // Handle form submission
+    
+      const formDataToSend = new FormData();
+      formDataToSend.append('stdnt_id', PersonalFormData.student_id);
+      formDataToSend.append('father_fname', familyFormData.father_fname);
+      formDataToSend.append('father_mname', familyFormData.father_mname);
+      formDataToSend.append('father_lname', familyFormData.father_lname);
+      formDataToSend.append('father_contact_number', familyFormData.father_contact_number);
+      formDataToSend.append('father_email', familyFormData.father_email);
+      formDataToSend.append('father_occupation', familyFormData.father_occupation);
+      formDataToSend.append('father_income', familyFormData.father_income);
+      formDataToSend.append('father_company', familyFormData.father_company);
+      formDataToSend.append('mother_fname', familyFormData.mother_fname);
+      formDataToSend.append('mother_mname', familyFormData.mother_mname);
+      formDataToSend.append('mother_lname', familyFormData.mother_lname);
+      formDataToSend.append('mother_contact_number', familyFormData.mother_contact_number);
+      formDataToSend.append('mother_email', familyFormData.mother_email);
+      formDataToSend.append('mother_occupation', familyFormData.mother_occupation);
+      formDataToSend.append('mother_income', familyFormData.mother_income);
+      formDataToSend.append('mother_company', familyFormData.mother_company);
+      formDataToSend.append('guardian_fname', familyFormData.guardian_fname);
+      formDataToSend.append('guardian_mname', familyFormData.guardian_mname);
+      formDataToSend.append('guardian_lname', familyFormData.guardian_lname);
+      formDataToSend.append('guardian_relation', familyFormData.guardian_relation);
+      formDataToSend.append('guardian_contact_number', familyFormData.guardian_contact_number);
+      formDataToSend.append('guardian_email', familyFormData.guardian_email);
+    
+      try {
+        const response = await fetch('http://127.0.0.1:8000/api/stdntfamily/', {
+          method: 'POST',
+          body: formDataToSend
+        });
+        if (response.ok) {
+          console.log(' request succeeded(family background)');
+        } else {
+          console.error('Failed to submit request(family background)');
+        }
+      } catch (error) {
+        console.error('Error submitting requests(family background):', error);
+      }
+    };
+    
+    const department_id = useRef(null)
+    const handleSubmitacademicbackground = async (e) => {
+      e.preventDefault();
+      // Handle form submission
+      const formDataToSend = new FormData();
+      formDataToSend.append('stdnt_id', PersonalFormData.student_id);
+      formDataToSend.append('course', AcademicBackgroundformData.course);
+      formDataToSend.append('department', department_id); // Use department_id here
+      formDataToSend.append('major_in', AcademicBackgroundformData.major_in);
+      formDataToSend.append('student_type', AcademicBackgroundformData.student_type);
+      formDataToSend.append('semester_entry', AcademicBackgroundformData.semester_entry);
+      formDataToSend.append('year_entry', AcademicBackgroundformData.year_entry);
+      formDataToSend.append('year_graduate', AcademicBackgroundformData.year_graduate);
+      formDataToSend.append('application_type', AcademicBackgroundformData.application_type);
+    
+      try {
+        const response = await fetch('http://127.0.0.1:8000/api/stdntacademicbackground/', {
+          method: 'POST',
+          body: formDataToSend
+        });
+        if (response.ok) {
+          console.log(' request succeeded(academic background)');
+        } else {
+          console.error('Failed to submit request(academic backgroun)');
+        }
+      } catch (error) {
+        console.error('Error submitting requests:(academic background)', error);
+      }
+    };
+    
+    const handleSubmitacademichistory = async (e) => {
+      e.preventDefault();
+      // Handle form submission
+      const formDataToSend = new FormData();
+      formDataToSend.append('stdnt_id', PersonalFormData.student_id);
+      formDataToSend.append('elementary_school', AcademicHistoryformData.elementary_school);
+      formDataToSend.append('elementary_address', AcademicHistoryformData.elementary_address);
+      formDataToSend.append('elementary_honors', AcademicHistoryformData.elementary_honors);
+      formDataToSend.append('elementary_graduate', AcademicHistoryformData.elementary_graduate);
+      formDataToSend.append('secondary_school', AcademicHistoryformData.secondary_school);
+      formDataToSend.append('secondary_address', AcademicHistoryformData.secondary_address);
+      formDataToSend.append('secondary_honors', AcademicHistoryformData.secondary_honors);
+      formDataToSend.append('secondary_graduate', AcademicHistoryformData.secondary_graduate);
+      formDataToSend.append('ncar', AcademicHistoryformData.ncar);
+      formDataToSend.append('latest_college', AcademicHistoryformData.latest_college);
+      formDataToSend.append('college_address', AcademicHistoryformData.college_address);
+      formDataToSend.append('college_honors', AcademicHistoryformData.college_honors);
+      formDataToSend.append('course', AcademicHistoryformData.course);
+    
+      try {
+        const response = await fetch('http://127.0.0.1:8000/api/stdntacademichistory/', {
+          method: 'POST',
+          body: formDataToSend
+        });
+        if (response.ok) {
+          console.log('Request succeeded(academic history)');
+        } else {
+          console.error('Failed to submit request(academic history)');
+        }
+      } catch (error) {
+        console.error('Error submitting requests(academic history):', error);
+      }
+    };
+    
 
-      //i want to run this when the url is changed, or routes are click or something like that
+    const [availableStudentIds, setAvailableStudentIds] = useState([]);
+    
+
+      
       const fetchAvailableStudentIds = async () => {
       try {
+        setIsUndergraduate(false)
+        console.log("is udergraduate: ", is_undergraduate)
         console.log('try Fetched data(app):');
         const response = await fetch('http://127.0.0.1:8000/api/stdntpersonal/');
         if (response.ok) {
           const data = await response.json();
           const studentIds = data.map((item) => item.student_id);
           console.log('Fetched data(app):', data); // Log the fetched data
+          console.log("app.js StudentIds: ", studentIds)
           setAvailableStudentIds(studentIds);
         } else {
           console.error('Failed to fetch available student IDs');
@@ -197,15 +309,30 @@
 
     useEffect(() => {
       fetchAvailableStudentIds();
-    }, [location.pathname]);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
 
+
+    const [is_undergraduate, setIsUndergraduate] = useState(false);
+    const runSubmit = (e) => 
+    {
+      e.preventDefault();
+      handleSubmitpersonal(e);
+      handleSubmitfamily(e);
+      handleSubmitacademicbackground(e);
+      if(is_undergraduate === true)
+      {
+        handleSubmitacademichistory(e);
+      }
+     
+    }
       
 
     return (
       <Router>
         <div className="App">
-          <Navbar />
+          <Navbar fetchid={fetchAvailableStudentIds} is_undergraduate_true={is_undergraduate}/>
           <div className='Content'>
             <AnimatePresence>
               <Routes>
@@ -216,11 +343,11 @@
               />
               <Route
                 path="/academic-background"
-                element={<AcademicBackground formData={AcademicBackgroundformData} handleChange={handleAcademicBackgroundDataChange} stdnt_id={PersonalFormData.f_name} sendStudentId={handleSendStudentId} available_student_id={availableStudentIds} fetch_id={fetchAvailableStudentIds} set_id={setAvailableStudentIds} onClick={() => fetchAvailableStudentIds()}/>}
+                element={<AcademicBackground formData={AcademicBackgroundformData} handleChange={handleAcademicBackgroundDataChange} stdnt_id={PersonalFormData.student_id} sendStudentId={handleSendStudentId} available_student_id={availableStudentIds} fetch_id={fetchAvailableStudentIds} set_id={setAvailableStudentIds} onClick={() => fetchAvailableStudentIds()} handle_submit={runSubmit} dep_id ={department_id} is_undergraduate={setIsUndergraduate}/>}
               />
 
               <Route path="/academic-history" 
-              element={<AcademicHistory formData={AcademicHistoryformData} handleChange={handleAcademicHistoryDataChange} stdnt_id={PersonalFormData.student_id} handle_submit={handleSubmit}/>} 
+              element={<AcademicHistory formData={AcademicHistoryformData} handleChange={handleAcademicHistoryDataChange} stdnt_id={PersonalFormData.student_id} handle_submit={runSubmit}/>} 
               />
             </Routes>
             </AnimatePresence>

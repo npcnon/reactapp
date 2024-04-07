@@ -1,3 +1,5 @@
+import AnimatedPage from './AnimatedPage';
+
 const AcademicHistory = ({ formData, handleChange, stdnt_id, handle_submit}) => {
   console.log(stdnt_id)
   const handleSubmit = async (e) => {
@@ -35,6 +37,7 @@ const AcademicHistory = ({ formData, handleChange, stdnt_id, handle_submit}) => 
   };
 
   return (
+    <AnimatedPage>
     <div className="container">
       <h2>Academic History Form</h2>
       <form onSubmit={handleSubmit}>
@@ -194,12 +197,16 @@ const AcademicHistory = ({ formData, handleChange, stdnt_id, handle_submit}) => 
           />
         </div>
 
-        
-        <button onClick={handle_submit}>
+        <div className="form-group-container">
+          <div className="button-container">
+        <button onClick={(e) => handle_submit(e)}>
       Submit
     </button>
+    </div>
+    </div>
       </form>
     </div>
+      </AnimatedPage>
   );
 };
 
