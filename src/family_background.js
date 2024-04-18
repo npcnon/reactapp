@@ -1,7 +1,7 @@
 import AnimatedPage from "./AnimatedPage";
 import { Link, useNavigate } from 'react-router-dom';
 
-const FamilyBackground = ({ formData, handleChange, validateForm}) => {
+const FamilyBackground = ({ formData, handleChange, validateForm, base_link}) => {
   const nav = useNavigate(); 
 
   const handleSubmit = async(event) => {
@@ -9,7 +9,7 @@ const FamilyBackground = ({ formData, handleChange, validateForm}) => {
     
     try{
       // eslint-disable-next-line
-      const response = await fetch('http://afknon.pythonanywhere.com/api/something/');
+      const response = await fetch(`${base_link}api/something/`);
     }
     catch (error) {
       // Handle fetch error (optional)

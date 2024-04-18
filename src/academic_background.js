@@ -2,7 +2,7 @@ import AnimatedPage from './AnimatedPage';
 import React, {useEffect} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-const AcademicBackground = ({ formData, handleChange, sendStudentId,available_student_id,handle_submit,department_id, is_undergraduate,validateForm }) => {
+const AcademicBackground = ({ formData, handleChange, sendStudentId,available_student_id,handle_submit,department_id, is_undergraduate,validateForm, base_link }) => {
 
 
   useEffect(() => {
@@ -84,7 +84,7 @@ const AcademicBackground = ({ formData, handleChange, sendStudentId,available_st
     
     try{
       // eslint-disable-next-line
-      const response = await fetch('http://afknon.pythonanywhere.com/api/something/');
+      const response = await fetch(`${base_link}api/something/`);
     }
     catch (error) {
       // Handle fetch error (optional)

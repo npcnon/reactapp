@@ -2,7 +2,7 @@
 import AnimatedPage from './AnimatedPage';
 import {useNavigate } from 'react-router-dom';
 
-const StudentForm = ({ formData, handleChange, validateForm}) => {
+const StudentForm = ({ formData, handleChange, validateForm,base_link}) => {
  
   const nav = useNavigate(); 
 
@@ -12,7 +12,7 @@ const StudentForm = ({ formData, handleChange, validateForm}) => {
     
     try{
       // eslint-disable-next-line
-      const response = await fetch('http://afknon.pythonanywhere.com/api/something/');
+      const response = await fetch(`${base_link}api/something/`);
     }
     catch (error) {
       // Handle fetch error (optional)
