@@ -184,7 +184,7 @@
       formDataToSendAdd.append('province_address', PersonalFormData.province_address);
       formDataToSendAdd.append('province_contact_number', PersonalFormData.province_contact_number);
       try {
-        const response1 = await fetch('http://127.0.0.1:8000/api/stdntpersonal/', {
+        const response1 = await fetch('http://afknon.pythonanywhere.com/api/stdntpersonal/', {
           method: 'POST',
           body: formDataToSend
         });
@@ -193,7 +193,7 @@
           console.log('First request succeeded');
           // Append additional formData to formDataToSendAdd
     
-          const response2 = await fetch('http://127.0.0.1:8000/api/addstdntinfo/', {
+          const response2 = await fetch('http://afknon.pythonanywhere.com/api/addstdntinfo/', {
             method: 'POST',
             body: formDataToSendAdd
           });
@@ -284,7 +284,7 @@
     formDataToSend.append('guardian_email', familyFormData.guardian_email);
   
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/stdntfamily/', {
+      const response = await fetch('http://afknon.pythonanywhere.com/api/stdntfamily/', {
         method: 'POST',
         body: formDataToSend
       });
@@ -349,7 +349,7 @@
       formDataToSend.append('application_type', AcademicBackgroundformData.application_type);
     
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/stdntacademicbackground/', {
+        const response = await fetch('http://afknon.pythonanywhere.com/api/stdntacademicbackground/', {
           method: 'POST',
           body: formDataToSend
         });
@@ -383,7 +383,7 @@
       formDataToSend.append('course', AcademicHistoryformData.course);
     
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/stdntacademichistory/', {
+        const response = await fetch('http://afknon.pythonanywhere.com/api/stdntacademichistory/', {
           method: 'POST',
           body: formDataToSend
         });
@@ -407,7 +407,7 @@
         setIsUndergraduate(false)
         console.log("is udergraduate: ", is_undergraduate)
         console.log('try Fetched data(app):');
-        const response = await fetch('http://127.0.0.1:8000/api/stdntpersonal/');
+        const response = await fetch('http://afknon.pythonanywhere.com/api/stdntpersonal/');
         if (response.ok) {
           const data = await response.json();
           const studentIds = data.map((item) => item.student_id);

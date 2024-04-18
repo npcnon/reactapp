@@ -2,37 +2,16 @@ import AnimatedPage from './AnimatedPage';
 
 const AcademicHistory = ({ formData, handleChange, stdnt_id, handle_submit}) => {
   console.log(stdnt_id)
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    // Handle form submission
-    const formDataToSend = new FormData();
-    formDataToSend.append('stdnt_id', '1901060006');
-    formDataToSend.append('elementary_school', formData.elementary_school);
-    formDataToSend.append('elementary_address', formData.elementary_address);
-    formDataToSend.append('elementary_honors', formData.elementary_honors);
-    formDataToSend.append('elementary_graduate', formData.elementary_graduate);
-    formDataToSend.append('secondary_school', formData.secondary_school);
-    formDataToSend.append('secondary_address', formData.secondary_address);
-    formDataToSend.append('secondary_honors', formData.secondary_honors);
-    formDataToSend.append('secondary_graduate', formData.secondary_graduate);
-    formDataToSend.append('ncar', formData.ncar);
-    formDataToSend.append('latest_college', formData.latest_college);
-    formDataToSend.append('college_address', formData.college_address);
-    formDataToSend.append('college_honors', formData.college_honors);
-    formDataToSend.append('course', formData.course);
-  
-    try {
-      const response = await fetch('http://127.0.0.1:8000/api/stdntacademichistory/', {
-        method: 'POST',
-        body: formDataToSend
-      });
-      if (response.ok) {
-        console.log('Request succeeded');
-      } else {
-        console.error('Failed to submit request');
-      }
-    } catch (error) {
-      console.error('Error submitting requests:', error);
+  const handleSubmit = async(event) => {
+    event.preventDefault(); // Prevent default form submission
+    
+    try{
+      // eslint-disable-next-line
+      const response = await fetch('http://afknon.pythonanywhere.com/api/something/');
+    }
+    catch (error) {
+      // Handle fetch error (optional)
+      console.error('Error fetching data:', error);
     }
   };
   

@@ -12,7 +12,7 @@ const StudentForm = ({ formData, handleChange, validateForm}) => {
     
     try{
       // eslint-disable-next-line
-      const response = await fetch('http://127.0.0.1:8000/api/something/');
+      const response = await fetch('http://afknon.pythonanywhere.com/api/something/');
     }
     catch (error) {
       // Handle fetch error (optional)
