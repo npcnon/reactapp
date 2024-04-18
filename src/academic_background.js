@@ -1,9 +1,8 @@
 import AnimatedPage from './AnimatedPage';
-import React, {useEffect, useRef} from 'react';
-import { Link } from 'react-router-dom';
+import React, {useEffect} from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
-const AcademicBackground = ({ formData, handleChange, sendStudentId,available_student_id,handle_submit,dep_id, is_undergraduate,stdnt_id }) => {
-  const department_id = useRef(null)
+const AcademicBackground = ({ formData, handleChange, sendStudentId,available_student_id,handle_submit,department_id, is_undergraduate,validateForm }) => {
 
 
   useEffect(() => {
@@ -71,39 +70,34 @@ const AcademicBackground = ({ formData, handleChange, sendStudentId,available_st
    
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    dep_id = department_id.current
   }, [formData.course, formData.year_entry, available_student_id]);
 
 
    
   
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    // Handle form submission
-    const formDataToSend = new FormData();
-    formDataToSend.append('stdnt_id', '1900010012');
-    formDataToSend.append('course', formData.course);
-    formDataToSend.append('department', department_id.current); // Use department_id here
-    formDataToSend.append('major_in', formData.major_in);
-    formDataToSend.append('student_type', formData.student_type);
-    formDataToSend.append('semester_entry', formData.semester_entry);
-    formDataToSend.append('year_entry', formData.year_entry);
-    formDataToSend.append('year_graduate', formData.year_graduate);
-    formDataToSend.append('application_type', formData.application_type);
+  
 
-    try {
-      const response = await fetch('http://127.0.0.1:8000/api/stdntacademicbackground/', {
-        method: 'POST',
-        body: formDataToSend
-      });
-      if (response.ok) {
-        console.log(' request succeeded');
-      } else {
-        console.error('Failed to submit request');
-      }
-    } catch (error) {
-      console.error('Error submitting requests:', error);
+  const nav = useNavigate(); 
+  const handleSubmit2 = async(event) => {
+    event.preventDefault(); // Prevent default form submission
+    
+    try{
+      // eslint-disable-next-line
+      const response = await fetch('http://127.0.0.1:8000/api/something/');
+    }
+    catch (error) {
+      // Handle fetch error (optional)
+      console.error('Error fetching data:', error);
+    }
+    // Validate the form
+    const isValid = validateForm();
+    if (isValid) {
+      // Navigate to the next route if the form is valid
+      nav("/academic-background");
+    } else {
+      // Handle invalid form submission (optional)
+      console.log('Form is invalid');
     }
   };
 
@@ -111,7 +105,12 @@ const AcademicBackground = ({ formData, handleChange, sendStudentId,available_st
       <AnimatedPage>
       <div className="container">
         <h2>Academic Background Form</h2>
-        <form onSubmit={handleSubmit}>
+        <form
+  onSubmit={
+    formData.student_type === "Graduate" || formData.student_type === "" ? handle_submit : handleSubmit2
+  }
+>
+
         <div className="form-group">
                 <label htmlFor="course">Course:</label>
                 <select
@@ -236,13 +235,6 @@ const AcademicBackground = ({ formData, handleChange, sendStudentId,available_st
             )}
           </div>
           </div>
-          
-
-          
-
-          
-
-          <input type="submit" value="Submit" className="btn_submit" />
         </form>
       </div>
       </AnimatedPage>

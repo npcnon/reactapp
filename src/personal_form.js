@@ -1,62 +1,34 @@
 
 import AnimatedPage from './AnimatedPage';
-import { Link } from 'react-router-dom';
+import {useNavigate } from 'react-router-dom';
 
-const StudentForm = ({ formData, handleChange}) => {
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const StudentForm = ({ formData, handleChange, validateForm}) => {
+ 
+  const nav = useNavigate(); 
 
-    const formDataToSend = new FormData();
-    formDataToSend.append('student_id', formData.student_id);
+
+  const handleSubmit = async(event) => {
+    event.preventDefault(); // Prevent default form submission
     
-    formDataToSend.append('f_name', formData.f_name);
-    formDataToSend.append('m_name', formData.m_name);
-    formDataToSend.append('l_name', formData.l_name);
-    formDataToSend.append('birth_date', formData.birth_date);
-    formDataToSend.append('birth_place', formData.birth_place);
-    formDataToSend.append('gender', formData.gender);
-    formDataToSend.append('marital_status', formData.marital_status);
-    formDataToSend.append('religion', formData.religion);
-    formDataToSend.append('country', formData.country);
-    formDataToSend.append('acr', formData.acr);
-    
-    const formDataToSendAdd = new FormData();
-    formDataToSendAdd.append('stdnt_id', formData.f_name);
-    formDataToSendAdd.append('email', formData.email);
-    formDataToSendAdd.append('contact_number', formData.contact_number);
-    formDataToSendAdd.append('citizenship', formData.citizenship);
-    formDataToSendAdd.append('city_address', formData.city_address);
-    formDataToSendAdd.append('city_contact_number', formData.city_contact_number);
-    formDataToSendAdd.append('province_address', formData.province_address);
-    formDataToSendAdd.append('province_contact_number', formData.province_contact_number);
-    try {
-      const response1 = await fetch('http://127.0.0.1:8000/api/stdntpersonal/', {
-        method: 'POST',
-        body: formDataToSend
-      });
-  
-      if (response1.ok) {
-        console.log('First request succeeded');
-        // Append additional formData to formDataToSendAdd
-  
-        const response2 = await fetch('http://127.0.0.1:8000/api/addstdntinfo/', {
-          method: 'POST',
-          body: formDataToSendAdd
-        });
-  
-        if (response2.ok) {
-          console.log('Second request succeeded');
-        } else {
-          console.error('Failed to submit second request');
-        }
-      } else {
-        console.error('Failed to submit first request');
-      }
-    } catch (error) {
-      console.error('Error submitting requests:', error);
+    try{
+      // eslint-disable-next-line
+      const response = await fetch('http://127.0.0.1:8000/api/something/');
+    }
+    catch (error) {
+      // Handle fetch error (optional)
+      console.error('Error fetching data:', error);
+    }
+    // Validate the form
+    const isValid = validateForm();
+    if (isValid) {
+      // Navigate to the next route if the form is valid
+      nav("/family-background");
+    } else {
+      // Handle invalid form submission (optional)
+      console.log('Form is invalid');
     }
   };
-  
+
   return (
     <AnimatedPage>
     <div className="container">
@@ -703,12 +675,9 @@ const StudentForm = ({ formData, handleChange}) => {
 
        </div>
         
-        
        <div className="form-group-container">
           <div className="button-container">
-              <Link to="/family-background" style={{ textDecoration: 'none' }}>
-                <button style={{ textDecoration: 'none' }}>Next</button>
-              </Link>
+          <button type="submit" style={{ textDecoration: 'none' }}>Next</button>
           </div>
           </div>
       </form>

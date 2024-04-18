@@ -1,53 +1,31 @@
 import AnimatedPage from "./AnimatedPage";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-const FamilyBackground = ({ formData, handleChange,stdnt_id }) => {
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    // Handle form submission
-   
-    const formDataToSend = new FormData();
-    formDataToSend.append('stdnt_id', stdnt_id);
-    formDataToSend.append('father_fname', formData.father_fname);
-    formDataToSend.append('father_mname', formData.father_mname);
-    formDataToSend.append('father_lname', formData.father_lname);
-    formDataToSend.append('father_contact_number', formData.father_contact_number);
-    formDataToSend.append('father_email', formData.father_email);
-    formDataToSend.append('father_occupation', formData.father_occupation);
-    formDataToSend.append('father_income', formData.father_income);
-    formDataToSend.append('father_company', formData.father_company);
-    formDataToSend.append('mother_fname', formData.mother_fname);
-    formDataToSend.append('mother_mname', formData.mother_mname);
-    formDataToSend.append('mother_lname', formData.mother_lname);
-    formDataToSend.append('mother_contact_number', formData.mother_contact_number);
-    formDataToSend.append('mother_email', formData.mother_email);
-    formDataToSend.append('mother_occupation', formData.mother_occupation);
-    formDataToSend.append('mother_income', formData.mother_income);
-    formDataToSend.append('mother_company', formData.mother_company);
-    formDataToSend.append('guardian_fname', formData.guardian_fname);
-    formDataToSend.append('guardian_mname', formData.guardian_mname);
-    formDataToSend.append('guardian_lname', formData.guardian_lname);
-    formDataToSend.append('guardian_relation', formData.guardian_relation);
-    formDataToSend.append('guardian_contact_number', formData.guardian_contact_number);
-    formDataToSend.append('guardian_email', formData.guardian_email);
-  
-    try {
-      const response = await fetch('http://127.0.0.1:8000/api/stdntfamily/', {
-        method: 'POST',
-        body: formDataToSend
-      });
-      if (response.ok) {
-        console.log(' request succeeded');
-      } else {
-        console.error('Failed to submit request');
-      }
-        }
-    catch(error) {
-      console.error('Error submitting requests:', error);
+const FamilyBackground = ({ formData, handleChange, validateForm}) => {
+  const nav = useNavigate(); 
+
+  const handleSubmit = async(event) => {
+    event.preventDefault(); // Prevent default form submission
+    
+    try{
+      // eslint-disable-next-line
+      const response = await fetch('http://127.0.0.1:8000/api/something/');
+    }
+    catch (error) {
+      // Handle fetch error (optional)
+      console.error('Error fetching data:', error);
+    }
+    // Validate the form
+    const isValid = validateForm();
+    if (isValid) {
+      // Navigate to the next route if the form is valid
+      nav("/academic-background");
+    } else {
+      // Handle invalid form submission (optional)
+      console.log('Form is invalid');
     }
   };
 
-  
   return (
     <AnimatedPage>
 
@@ -328,9 +306,9 @@ const FamilyBackground = ({ formData, handleChange,stdnt_id }) => {
             <Link to="/" style={{ textDecoration: 'none' }}>
               <button style={{ textDecoration: 'none' }}>Back</button>
             </Link>
-              <Link to="/academic-background" style={{ textDecoration: 'none' }}>
-                <button style={{ textDecoration: 'none' }}>Next</button>
-              </Link>
+            
+                <button type="submit" style={{ textDecoration: 'none' }}>Next</button>
+            
           </div>
           </div>
       </form>

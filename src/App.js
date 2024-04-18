@@ -119,10 +119,48 @@
     };
 
 
+    const validatePersonalForm = () => {
+      // Check if all required fields are filled out correctly
+      // Return true if the form is valid, otherwise false
+      
+      // For example, you can check if all required fields are filled out:
+      if (
+          PersonalFormData.f_name.trim() === '' ||
+          PersonalFormData.m_name.trim() === '' ||
+          PersonalFormData.l_name.trim() === '' ||
+          PersonalFormData.birth_date.trim() === '' ||
+          PersonalFormData.birth_place.trim() === '' ||
+          PersonalFormData.gender.trim() === '' ||
+          PersonalFormData.marital_status.trim() === '' ||
+          PersonalFormData.religion.trim() === '' ||
+          PersonalFormData.country.trim() === '' ||
+          PersonalFormData.acr.trim() === '' ||
+          PersonalFormData.email.trim() === '' ||
+          PersonalFormData.contact_number.trim() === '' ||
+          PersonalFormData.citizenship.trim() === '' ||
+          PersonalFormData.city_address.trim() === '' ||
+          PersonalFormData.city_contact_number.trim() === '' ||
+          PersonalFormData.province_address.trim() === '' ||
+          PersonalFormData.province_contact_number.trim() === ''
+      ) {
+          // If any required field is empty, return false
+          console.log("form is not valid")
+          return false;
+      }
+      
+      // Additional validation checks can be added here if needed
+      
+      // If all checks pass, return true
+      console.log("form is valid")
+      return true;
+  };  
+  
+    
     const handleSubmitpersonal = async (e) => {
       e.preventDefault();
 
       const formDataToSend = new FormData();
+      console.log("Personal Data id:", PersonalFormData.student_id)
       formDataToSend.append('student_id', PersonalFormData.student_id);
       
       formDataToSend.append('f_name', PersonalFormData.f_name);
@@ -173,59 +211,136 @@
       }
     };
 
+    const familyvalidateForm = () => {
+      // Perform validation logic here
+      // Check if all required fields are filled out correctly
+      // Return true if the form is valid, otherwise false
+      // You can use familyFormData object to access form data
+    
+      // For example, you can check if all required fields are filled out:
+      if (
+        familyFormData.father_fname.trim() === '' ||
+        familyFormData.father_mname.trim() === '' ||
+        familyFormData.father_lname.trim() === '' ||
+        familyFormData.father_email.trim() === '' ||
+        familyFormData.father_contact_number.trim() === '' ||
+        familyFormData.father_occupation.trim() === '' ||
+        familyFormData.father_income.trim() === '' ||
+        familyFormData.father_company.trim() === '' ||
+        familyFormData.mother_fname.trim() === '' ||
+        familyFormData.mother_mname.trim() === '' ||
+        familyFormData.mother_lname.trim() === '' ||
+        familyFormData.mother_email.trim() === '' ||
+        familyFormData.mother_contact_number.trim() === '' ||
+        familyFormData.mother_occupation.trim() === '' ||
+        familyFormData.mother_company.trim() === '' ||
+        familyFormData.guardian_fname.trim() === '' ||
+        familyFormData.guardian_mname.trim() === '' ||
+        familyFormData.guardian_lname.trim() === '' ||
+        familyFormData.guardian_relation.trim() === '' ||
+        familyFormData.guardian_contact_number.trim() === '' ||
+        familyFormData.guardian_email.trim() === ''
+      ) {
+        // If any required field is empty, return false
+        console.log("form is not valid")
+        return false;
+      }
+    
+      // Additional validation checks can be added here if needed
+    
+      // If all checks pass, return true
+      console.log("form is valid")
+      return true;
+    };
+    
 
     const handleSubmitfamily = async (e) => {
       e.preventDefault();
       // Handle form submission
-    
+      
       const formDataToSend = new FormData();
-      formDataToSend.append('stdnt_id', PersonalFormData.student_id);
-      formDataToSend.append('father_fname', familyFormData.father_fname);
-      formDataToSend.append('father_mname', familyFormData.father_mname);
-      formDataToSend.append('father_lname', familyFormData.father_lname);
-      formDataToSend.append('father_contact_number', familyFormData.father_contact_number);
-      formDataToSend.append('father_email', familyFormData.father_email);
-      formDataToSend.append('father_occupation', familyFormData.father_occupation);
-      formDataToSend.append('father_income', familyFormData.father_income);
-      formDataToSend.append('father_company', familyFormData.father_company);
-      formDataToSend.append('mother_fname', familyFormData.mother_fname);
-      formDataToSend.append('mother_mname', familyFormData.mother_mname);
-      formDataToSend.append('mother_lname', familyFormData.mother_lname);
-      formDataToSend.append('mother_contact_number', familyFormData.mother_contact_number);
-      formDataToSend.append('mother_email', familyFormData.mother_email);
-      formDataToSend.append('mother_occupation', familyFormData.mother_occupation);
-      formDataToSend.append('mother_income', familyFormData.mother_income);
-      formDataToSend.append('mother_company', familyFormData.mother_company);
-      formDataToSend.append('guardian_fname', familyFormData.guardian_fname);
-      formDataToSend.append('guardian_mname', familyFormData.guardian_mname);
-      formDataToSend.append('guardian_lname', familyFormData.guardian_lname);
-      formDataToSend.append('guardian_relation', familyFormData.guardian_relation);
-      formDataToSend.append('guardian_contact_number', familyFormData.guardian_contact_number);
-      formDataToSend.append('guardian_email', familyFormData.guardian_email);
-    
-      try {
-        const response = await fetch('http://127.0.0.1:8000/api/stdntfamily/', {
-          method: 'POST',
-          body: formDataToSend
-        });
-        if (response.ok) {
-          console.log(' request succeeded(family background)');
-        } else {
-          console.error('Failed to submit request(family background)');
-        }
-      } catch (error) {
-        console.error('Error submitting requests(family background):', error);
+    formDataToSend.append('stdnt_id', PersonalFormData.student_id);
+    formDataToSend.append('father_fname', familyFormData.father_fname);
+    formDataToSend.append('father_mname', familyFormData.father_mname);
+    formDataToSend.append('father_lname', familyFormData.father_lname);
+    formDataToSend.append('father_contact_number', familyFormData.father_contact_number);
+    formDataToSend.append('father_email', familyFormData.father_email);
+    formDataToSend.append('father_occupation', familyFormData.father_occupation);
+    formDataToSend.append('father_income', familyFormData.father_income);
+    formDataToSend.append('father_company', familyFormData.father_company);
+    formDataToSend.append('mother_fname', familyFormData.mother_fname);
+    formDataToSend.append('mother_mname', familyFormData.mother_mname);
+    formDataToSend.append('mother_lname', familyFormData.mother_lname);
+    formDataToSend.append('mother_contact_number', familyFormData.mother_contact_number);
+    formDataToSend.append('mother_email', familyFormData.mother_email);
+    formDataToSend.append('mother_occupation', familyFormData.mother_occupation);
+    formDataToSend.append('mother_income', familyFormData.mother_income);
+    formDataToSend.append('mother_company', familyFormData.mother_company);
+    formDataToSend.append('guardian_fname', familyFormData.guardian_fname);
+    formDataToSend.append('guardian_mname', familyFormData.guardian_mname);
+    formDataToSend.append('guardian_lname', familyFormData.guardian_lname);
+    formDataToSend.append('guardian_relation', familyFormData.guardian_relation);
+    formDataToSend.append('guardian_contact_number', familyFormData.guardian_contact_number);
+    formDataToSend.append('guardian_email', familyFormData.guardian_email);
+  
+    try {
+      const response = await fetch('http://127.0.0.1:8000/api/stdntfamily/', {
+        method: 'POST',
+        body: formDataToSend
+      });
+      if (response.ok) {
+        console.log(' request succeeded');
+      } else {
+        console.error('Failed to submit request(family)');
       }
+        }
+    catch(error) {
+      console.error('Error submitting requests(family):', error);
+    }
     };
+    
+
+    const academicbackgroundvalidateForm = () => {
+      // Perform validation logic here
+      // Check if all required fields are filled out correctly
+      // Return true if the form is valid, otherwise false
+      // You can use AcademicBackgroundformData object to access form data
+      
+      // For example, you can check if all required fields are filled out:
+      if (
+        PersonalFormData.student_id.trim() === '' ||
+        AcademicBackgroundformData.course.trim() === '' ||
+        AcademicBackgroundformData.major_in.trim() === '' ||
+        AcademicBackgroundformData.student_type.trim() === '' ||
+        AcademicBackgroundformData.semester_entry.trim() === '' ||
+        AcademicBackgroundformData.year_entry.trim() === '' ||
+        AcademicBackgroundformData.year_graduate.trim() === '' ||
+        AcademicBackgroundformData.application_type.trim() === '' ||
+        !department_id.current // Check if department_id is not set
+      ) {
+        // If any required field is empty, return false
+        console.log("form is not valid")
+        return false;
+      }
+      
+      // Additional validation checks can be added here if needed
+      
+      // If all checks pass, return true
+      console.log("form is valid")
+      return true;
+    };
+
     
     const department_id = useRef(null)
     const handleSubmitacademicbackground = async (e) => {
       e.preventDefault();
+      console.log("Academic background student id:",PersonalFormData.student_id)
+      console.log("Academic background department id: ", department_id.current)
       // Handle form submission
       const formDataToSend = new FormData();
       formDataToSend.append('stdnt_id', PersonalFormData.student_id);
       formDataToSend.append('course', AcademicBackgroundformData.course);
-      formDataToSend.append('department', department_id); // Use department_id here
+      formDataToSend.append('department', department_id.current); // Use department_id here
       formDataToSend.append('major_in', AcademicBackgroundformData.major_in);
       formDataToSend.append('student_type', AcademicBackgroundformData.student_type);
       formDataToSend.append('semester_entry', AcademicBackgroundformData.semester_entry);
@@ -241,7 +356,7 @@
         if (response.ok) {
           console.log(' request succeeded(academic background)');
         } else {
-          console.error('Failed to submit request(academic backgroun)');
+          console.error('Failed to submit request(academic background)');
         }
       } catch (error) {
         console.error('Error submitting requests:(academic background)', error);
@@ -315,19 +430,20 @@
 
 
     const [is_undergraduate, setIsUndergraduate] = useState(false);
-    const runSubmit = (e) => 
-    {
+    const runSubmit = async (e) => {
       e.preventDefault();
-      handleSubmitpersonal(e);
-      handleSubmitfamily(e);
-      handleSubmitacademicbackground(e);
-      if(is_undergraduate === true)
-      {
-        handleSubmitacademichistory(e);
+      try {
+        await handleSubmitpersonal(e);
+        await handleSubmitacademicbackground(e);
+        await handleSubmitfamily(e); // Uncomment if needed
+        if (is_undergraduate === true) {
+          await handleSubmitacademichistory(e); // Uncomment if needed
+        }
+      } catch (error) {
+        console.error('Error submitting forms:', error);
       }
-     
     }
-      
+    
 
     return (
       <Router>
@@ -336,14 +452,42 @@
           <div className='Content'>
             <AnimatePresence>
               <Routes>
-              <Route exact path="/" element={<PersonalForm formData={PersonalFormData} handleChange={handlePersonalDataChange} stdnt_id={PersonalFormData.student_id} />} />
+              <Route 
+              exact path="/" 
+              element={<PersonalForm 
+              formData={PersonalFormData} 
+              handleChange={handlePersonalDataChange} 
+              stdnt_id={PersonalFormData.student_id} 
+              validateForm={validatePersonalForm}
+              />} />
               <Route
                 path="/family-background"
-                element={<FamilyBackground formData={familyFormData} handleChange={handleFamilyBackgroundChange} stdnt_id={PersonalFormData.student_id} onClick={() => fetchAvailableStudentIds()}/>}
+                element={
+                <FamilyBackground 
+                formData={familyFormData} 
+                handleChange={handleFamilyBackgroundChange} 
+                stdnt_id={PersonalFormData.student_id} 
+                onClick={() => fetchAvailableStudentIds()}
+                validateForm={familyvalidateForm}
+                />}
               />
               <Route
                 path="/academic-background"
-                element={<AcademicBackground formData={AcademicBackgroundformData} handleChange={handleAcademicBackgroundDataChange} stdnt_id={PersonalFormData.student_id} sendStudentId={handleSendStudentId} available_student_id={availableStudentIds} fetch_id={fetchAvailableStudentIds} set_id={setAvailableStudentIds} onClick={() => fetchAvailableStudentIds()} handle_submit={runSubmit} dep_id ={department_id} is_undergraduate={setIsUndergraduate}/>}
+                element={
+                <AcademicBackground 
+                formData={AcademicBackgroundformData} 
+                handleChange={handleAcademicBackgroundDataChange} 
+                stdnt_id={PersonalFormData.student_id} 
+                sendStudentId={handleSendStudentId} 
+                available_student_id={availableStudentIds} 
+                fetch_id={fetchAvailableStudentIds} 
+                set_id={setAvailableStudentIds} 
+                onClick={() => fetchAvailableStudentIds()} 
+                handle_submit={runSubmit} 
+                department_id ={department_id} 
+                is_undergraduate={setIsUndergraduate}/>}
+                validateForm={academicbackgroundvalidateForm}
+
               />
 
               <Route path="/academic-history" 

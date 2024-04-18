@@ -6,7 +6,7 @@ const AcademicHistory = ({ formData, handleChange, stdnt_id, handle_submit}) => 
     e.preventDefault();
     // Handle form submission
     const formDataToSend = new FormData();
-    formDataToSend.append('stdnt_id', stdnt_id);
+    formDataToSend.append('stdnt_id', '1901060006');
     formDataToSend.append('elementary_school', formData.elementary_school);
     formDataToSend.append('elementary_address', formData.elementary_address);
     formDataToSend.append('elementary_honors', formData.elementary_honors);
@@ -35,6 +35,7 @@ const AcademicHistory = ({ formData, handleChange, stdnt_id, handle_submit}) => 
       console.error('Error submitting requests:', error);
     }
   };
+  
 
   return (
     <AnimatedPage>
@@ -199,9 +200,8 @@ const AcademicHistory = ({ formData, handleChange, stdnt_id, handle_submit}) => 
 
         <div className="form-group-container">
           <div className="button-container">
-        <button onClick={(e) => handle_submit(e)}>
-      Submit
-    </button>
+          <button onClick={(e) => handle_submit(e)}>Submit</button>
+        
     </div>
     </div>
       </form>
@@ -209,6 +209,4 @@ const AcademicHistory = ({ formData, handleChange, stdnt_id, handle_submit}) => 
       </AnimatedPage>
   );
 };
-
-//<input type="submit" value="Submit" className="btn_submit" />
 export default AcademicHistory;
