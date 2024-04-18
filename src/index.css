@@ -187,3 +187,33 @@ input[type="submit"],button {
   flex: 1;
   margin: 0 8px; /* Adjust margin as needed */
 }
+
+.navbar-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.dropnav {
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  padding: 10px;
+  border-radius: 8px;
+  max-width: 10%;
+  margin-right: 20px;
+  margin-top: 20px;
+}
+
+.dropnav h2 {
+  color: white;
+}
+
+#titlename {
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 50px;
+  margin-left: auto; /* Set left margin to auto */
+  margin-right: 18%; /* Set right margin to auto */
+  text-align: center; /* Center align the text within the element */
+}
+

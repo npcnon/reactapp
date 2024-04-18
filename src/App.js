@@ -6,6 +6,8 @@ import AcademicBackground from './academic_background';
 import AcademicHistory from './academic_history';
 import Navbar from './navbar';
 import { AnimatePresence } from 'framer-motion';
+import DropdownNav from './dropnav';
+import SimpleTable from './view_students';
 
 
 //year4/department2/0001
@@ -293,7 +295,7 @@ function App() {
       body: formDataToSend
     });
     if (response.ok) {
-      console.log(' request succeeded');
+      console.log(' request succeeded(family)');
     } else {
       console.error('Failed to submit request(family)');
     }
@@ -452,6 +454,10 @@ function App() {
     return (
       <Router>
         <div className="App">
+          <DropdownNav/>
+            {/*if View/Edit Students are selected in dropnav
+          <SimpleTable/>
+           else if enroll Students are selected in dropnav*/}
           <Navbar fetchid={fetchAvailableStudentIds} is_undergraduate_true={is_undergraduate}/>
           <div className='Content'>
             <AnimatePresence>
