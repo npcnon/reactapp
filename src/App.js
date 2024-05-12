@@ -14,8 +14,8 @@
   function App() {
 
 
-    //const base_link = `https://afknon.pythonanywhere.com/`
-    const base_link = `http://127.0.0.1:8000/`
+    const base_link = `https://afknon.pythonanywhere.com/`
+    //const base_link = `http://127.0.0.1:8000/`
     const [PersonalFormData, setPersonalFormData] = useState({
       student_id:'',
       f_name:'',
