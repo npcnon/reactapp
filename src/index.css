@@ -217,3 +217,31 @@ input[type="submit"],button {
   text-align: center; /* Center align the text within the element */
 }
 
+.table-container {
+  overflow-x: auto;
+}
+
+.table-container table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-container th,
+.table-container td {
+  border: 1px solid white;
+  padding: 8px;
+  text-align: left;
+  color: white;
+}
+
+.table-container th {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.table-container tbody tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.table-container tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
